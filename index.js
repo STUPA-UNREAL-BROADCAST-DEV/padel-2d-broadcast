@@ -26,6 +26,11 @@ const defaultState = {
   doublebar_metric: 'serve_success'
 };
 
+if (!fs.existsSync(DATA_FILE)) {
+  fs.mkdirSync(path.dirname(DATA_FILE), { recursive: true });
+  fs.writeFileSync(DATA_FILE, JSON.stringify(defaultState, null, 2), 'utf8');
+}
+
 function extractRemoteState(raw) {
   if (!raw || typeof raw !== 'object') {
     return null;
